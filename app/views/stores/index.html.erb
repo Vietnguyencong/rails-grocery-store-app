@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<h1 class="text-center"><Strong>STORE</Strong></h1>
+<%= link_to 'Create a new store', new_store_path, class:"btn btn-primary mb-3 mt-3" %>
+    <div class="row">
+      <div class="card-deck">
+        <% @stores.each do |store| %>
+        <div class="col-4">
+          <div class="card mb-3 h-200">
+            <div class="card-header">
+              <h4><%= store.name %></h4>
+            </div>
+            <div class="card-body">
+              <p><strong>Description: </strong><%= store.description %></p>
+              <P><strong>Counttry: </strong><%= store.country %></P>
+              <p><strong>Url: </strong><%= store.url %></p>
+              <p><strong>reviews: </strong><%=store.count_reviews  %></p> 
+              <div class="mt-4 text-center"> 
+                <%= link_to 'Show', store , class:"btn btn-primary btn-sm"%>
+                <%= link_to 'Edit', edit_store_path(store), class:"btn btn-warning btn-sm" %>
+                <%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-sm" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+</div>
+<br>
+

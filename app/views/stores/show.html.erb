@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <strong>Name:</strong>
+  <%= @store.name %>
+</h2>
+
+<h4>
+  <strong>Description:</strong>
+  <%= @store.description %>
+</h4>
+<h4> Reviews: <%=@store.count_reviews%>/5</h4>
+
+<div class="progress mb-4 mt-4 col-4">
+  <div class="progress-bar progress-bar" role="progressbar" style="width: <%=@store.count_reviews*10*2%>%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="20"><%=@store.count_reviews%></div>
+</div>
+
+
+<%= link_to 'Edit', edit_store_path(@store), class:"btn btn-sm btn-primary" %>
+<%= link_to 'Back', stores_path, class:"btn btn-sm btn-secondary" %>
+<hr>
+<h3>deparments</h3><br>
+      <div class="row">
+      <% @departments.each do |d| %>
+        <div class="col-6">  
+      
+          <div class="card mb-4">
+            <h3 class="card-header"> <%= d.name %></h3>
+            <div class="card-body">
+                  <h5> Employee names in the department </h5>
+                  <%d.employees.all.each do |e|%>
+                    <div class="mr-2"><%=e.first_name%></div>
+                  <%end%>   
+                <div class="row m-4"> 
+                  <%= link_to 'Show', d, class:"btn btn-sm btn-primary m-2" %><br>
+                  <%= link_to 'Edit', edit_department_path(d) ,class:"btn btn-sm btn-warning m-2"%> <br>
+                  <%= link_to 'Destroy', d, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-sm btn-danger m-2" %>
+                </div> 
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+
+<hr>
+
+<h3>Reviews from the employee</h3>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="row"> 
+              <p class="col-3"><strong>Last name</strong></p>
+              <p class="col-3"><strong>Department</strong></p>
+              <p class="col-3"><strong>Reviews</strong></p>
+            </div> 
+          </div>
+        </div>
+
+     <% @reviews.each do |s| %>
+        <div class="card">
+          <div class="card-body">
+            <div class="row"> 
+              <p class="col-3"><strong><%=s.employee.last_name%></strong></p>
+              <p class="col-3"><%=s.employee.department.name%></p>
+              <p class="col-4"><%= s.note %></p>
+            </div> 
+          </div>
+        </div>
+        
+      <% end %>
+  
+
+
+
